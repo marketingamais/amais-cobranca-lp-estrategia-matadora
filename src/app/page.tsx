@@ -169,10 +169,47 @@ export default function Page() {
                 <h2 className="text-2xl font-bold mb-2">Agende seu diagnóstico</h2>
                 <p className="text-text-secondary text-sm">Preencha os dados abaixo para participar do mapeamento:</p>
               </div>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form 
+                className="space-y-4" 
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const data = {
+                    email: formData.get('email') as string,
+                    phone: formData.get('phone') as string,
+                    firstName: (formData.get('fullName') as string)?.split(' ')[0] || '',
+                    lastName: (formData.get('fullName') as string)?.split(' ').slice(1).join(' ') || '',
+                    institution: formData.get('institution') as string,
+                    role: formData.get('role') as string,
+                  };
+
+                  // 1. Meta Pixel track (Browser)
+                  if (typeof window !== 'undefined' && window.fbq) {
+                    window.fbq('track', 'Lead', {
+                      content_name: 'Diagnóstico Gratuito',
+                      content_category: 'Lead Generation',
+                      value: 0,
+                      currency: 'BRL'
+                    });
+                  }
+
+                  // 2. Meta Conversions API (Server)
+                  try {
+                    await fetch('/api/fb-conversions', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data),
+                    });
+                  } catch (err) {
+                    console.error('CAPI Error:', err);
+                  }
+
+                  alert('Solicitação enviada com sucesso! Entraremos em contato em breve.');
+                }}
+              >
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Qual seu cargo na instituição?</label>
-                  <select defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                  <select name="role" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                     <option value="" disabled className="bg-[#05050a]">Selecione seu cargo</option>
                     <option value="mantenedor" className="bg-[#05050a]">Mantenedor</option>
                     <option value="diretor" className="bg-[#05050a]">Diretor</option>
@@ -186,7 +223,7 @@ export default function Page() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Segmento</label>
-                    <select defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                    <select name="segment" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                       <option value="" disabled className="bg-[#05050a]">Selecione</option>
                       <option value="basica" className="bg-[#05050a]">Educação básica</option>
                       <option value="faculdade" className="bg-[#05050a]">Faculdade</option>
@@ -197,7 +234,7 @@ export default function Page() {
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Nº de Alunos</label>
-                    <select defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                    <select name="students" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                       <option value="" disabled className="bg-[#05050a]">Selecione</option>
                       <option value="ate500" className="bg-[#05050a]">Até 500 alunos</option>
                       <option value="501a1000" className="bg-[#05050a]">501 a 1000 alunos</option>
@@ -208,20 +245,22 @@ export default function Page() {
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Instituição de Ensino</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="Nome da instituição" />
+                  <input name="institution" type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="Nome da instituição" required />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Nome Completo</label>
-                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="Seu nome" />
+                  <input name="fullName" type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="Seu nome" required />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Telefone / WhatsApp</label>
                     <input 
+                      name="phone"
                       type="tel"
                       placeholder="(81) 90000-0000"
+                      required
                       onChange={(e) => {
                         let v = e.target.value.replace(/\D/g, '');
                         if (v.length > 11) v = v.slice(0, 11);
@@ -234,7 +273,7 @@ export default function Page() {
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">E-mail</label>
-                    <input type="email" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="contato@instituicao.com.br" />
+                    <input name="email" type="email" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="contato@instituicao.com.br" required />
                   </div>
                 </div>
 

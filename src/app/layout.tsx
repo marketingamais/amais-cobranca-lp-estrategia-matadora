@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { DM_Sans, Inter } from 'next/font/google';
 import './globals.css';
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { MetaPixel } from '@/components/analytics/MetaPixel';
 
 const dmSans = DM_Sans({ 
   subsets: ['latin'], 
@@ -23,8 +25,6 @@ export const metadata: Metadata = {
     'theme-color': '#05050a',
   },
 };
-
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,
