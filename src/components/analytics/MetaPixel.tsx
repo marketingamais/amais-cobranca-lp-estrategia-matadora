@@ -12,14 +12,15 @@ declare global {
 
 export const MetaPixel = () => {
   const pathname = usePathname();
-  const pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
+  // Fallback para o ID fornecido pelo Facebook para garantir o disparo
+  const pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '1956609178559019';
 
   useEffect(() => {
     if (!pixelId) return;
 
-    // Track PageView on route changes
     if (typeof window !== 'undefined' && window.fbq) {
       window.fbq('track', 'PageView');
+      console.log('🔵 Meta Pixel: PageView fired for', pathname);
     }
   }, [pathname, pixelId]);
 
