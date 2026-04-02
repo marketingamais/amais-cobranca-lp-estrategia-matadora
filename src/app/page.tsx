@@ -217,13 +217,16 @@ export default function Page() {
                       body: JSON.stringify(data),
                     });
                     
-                    // Abrir o modal independente do status interno, desde que o request complete
-                    setShowSuccess(true);
+                    // Forçar o reset e a abertura do modal de forma sequencial
                     (e.target as HTMLFormElement).reset();
+                    
+                    setTimeout(() => {
+                      setShowSuccess(true);
+                    }, 50);
+
                   } catch (err) {
                     console.error('Lead Error:', err);
-                    // Como fallback para o usuário, mostramos o modal mesmo se a API der timeout
-                    setShowSuccess(true);
+                    setShowSuccess(true); // Fallback
                   } finally {
                     setIsSubmitting(false);
                   }
