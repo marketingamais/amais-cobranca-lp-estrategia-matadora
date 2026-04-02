@@ -1,16 +1,6 @@
 'use client';
 
-/**
- * VideoBackground.tsx
- * Componente de background em vídeo — idêntico ao da Referência 3.
- * Usa o vídeo original da landing page em loop, muted, sem controles.
- *
- * Camadas (do fundo para cima):
- *  1. <video> em loop
- *  2. Blur overlay (15px) — igual ao original
- *  3. Overlay de cor escura ajustável por seção
- *  4. Sombra inferior em degradê preto
- */
+import { useRef, useEffect } from 'react';
 
 interface VideoBackgroundProps {
   /** Opacidade do overlay escuro sobre o vídeo (0–1). Default: 0.45 */
@@ -25,6 +15,19 @@ export function VideoBackground({
   bottomFade = true,
   className = '',
 }: VideoBackgroundProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Garantir o loop infinito mesmo se o atributo loop nativo falhar
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.play().catch(() => {
+        // Se o autoplay for bloqueado, tentamos novamente ao clicar
+        document.addEventListener('click', () => video.play(), { once: true });
+      });
+    }
+  }, []);
+
   return (
     <div
       className={`fixed inset-0 overflow-hidden pointer-events-none ${className}`}
@@ -32,12 +35,19 @@ export function VideoBackground({
     >
       {/* ── 1. Vídeo em loop ── */}
       <video
+        ref={videoRef}
         src="/bg-video.mp4"
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
+        onEnded={() => {
+          if (videoRef.current) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play().catch(() => {});
+          }
+        }}
         style={{
           position: 'absolute',
           inset: 0,
