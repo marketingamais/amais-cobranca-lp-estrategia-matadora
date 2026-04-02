@@ -352,34 +352,36 @@ export default function Page() {
       <div className="relative z-10 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
         <section className="relative z-10 max-w-[1120px] mx-auto px-6 xl:px-0">
-          <GlassCard variant="blue" className="p-10 md:p-16 relative overflow-hidden border-brand-primary/40 shadow-[0_0_40px_rgba(0,85,254,0.20)]">
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_top_right,_var(--color-brand-primary)_0%,_transparent_70%)] opacity-10" />
-            <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
-              <Reveal>
-                <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold mb-6">O que sua escola recebe</motion.h2>
-                <motion.p variants={fadeIn} className="text-xl text-text-secondary mb-8 leading-relaxed">
+          <GlassCard variant="blue" className="p-6 sm:p-10 md:p-16 relative overflow-hidden border-brand-primary/40 shadow-[0_0_40px_rgba(0,85,254,0.20)]">
+            <div className="absolute top-0 right-0 w-full h-full bg-brand-primary/5 pointer-events-none" />
+            <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center relative z-10 w-full">
+              <Reveal className="w-full text-center md:text-left">
+                <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold mb-4">O que sua escola recebe</motion.h2>
+                <motion.p variants={fadeIn} className="text-lg md:text-xl text-text-secondary mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
                   Um panorama detalhado e estratégico gerado por especialistas para identificar falhas e estancar a perda de receita da sua instituição.
                 </motion.p>
-                <motion.div variants={fadeIn} className="w-16 h-1 bg-brand-primary rounded-full shadow-[0_0_10px_rgba(11,92,255,0.5)]" />
+                <motion.div variants={fadeIn} className="w-16 h-1 bg-brand-primary rounded-full shadow-[0_0_10px_rgba(11,92,255,0.5)] mx-auto md:mx-0" />
               </Reveal>
 
-              <Reveal delay={0.09}>
-                {[
-                  'Diagnóstico gratuito da inadimplência',
-                  'Análise dos processos atuais',
-                  'Recomendações práticas de melhoria',
-                  'Visão externa especializada',
-                  'Conversa com especialista em cobrança',
-                ].map((item, i) => (
-                  <motion.li
-                    key={i}
-                    variants={fadeRight}
-                    className="flex items-center gap-4 text-lg p-5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-primary/20 transition-all shadow-sm list-none mb-4"
-                  >
-                    <CheckCircle size={28} weight="fill" className="text-accent-success shrink-0 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]" />
-                    <span className="font-medium text-text-primary">{item}</span>
-                  </motion.li>
-                ))}
+              <Reveal delay={0.09} className="w-full">
+                <ul className="space-y-4 w-full p-0 m-0">
+                  {[
+                    'Diagnóstico gratuito da inadimplência',
+                    'Análise dos processos atuais',
+                    'Recomendações práticas de melhoria',
+                    'Visão externa especializada',
+                    'Conversa com especialista em cobrança',
+                  ].map((item, i) => (
+                    <motion.li
+                      key={i}
+                      variants={fadeRight}
+                      className="flex items-center gap-4 text-base md:text-lg p-4 md:p-5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-primary/20 transition-all shadow-sm list-none"
+                    >
+                      <CheckCircle size={24} weight="fill" className="text-accent-success shrink-0 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]" />
+                      <span className="font-medium text-text-primary text-left">{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
               </Reveal>
             </div>
           </GlassCard>
