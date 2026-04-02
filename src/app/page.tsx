@@ -222,11 +222,12 @@ export default function Page() {
                     
                     setTimeout(() => {
                       setShowSuccess(true);
-                    }, 50);
+                      console.log('✅ SuccessModal disparado!');
+                    }, 100);
 
                   } catch (err) {
-                    console.error('Lead Error:', err);
-                    setShowSuccess(true); // Fallback
+                    console.error('❌ Erro Lead:', err);
+                    setShowSuccess(true); // Fallback amigável
                   } finally {
                     setIsSubmitting(false);
                   }
@@ -548,8 +549,7 @@ export default function Page() {
             </p>
           </motion.div>
         </Reveal>
-      </section>
-
+      <SuccessModal isOpen={showSuccess} onClose={() => setShowSuccess(false)} />
     </div>
   );
 }
