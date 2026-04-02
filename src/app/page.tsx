@@ -6,7 +6,7 @@
  * Optimized useInView margins.
  */
 
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import {
@@ -21,6 +21,7 @@ import { VideoBackground }  from '@/components/ui/VideoBackground';
 import { StepsInteractive } from '@/components/ui/StepsInteractive';
 import { AlertTicker }      from '@/components/ui/AlertTicker';
 import { Header }           from '@/components/ui/Header';
+import { SuccessModal }     from '@/components/ui/SuccessModal';
 
 /* Remotion player carregado apenas no client, sem bloquear TTI */
 const RemotionPlayer = dynamic(
@@ -125,6 +126,8 @@ function LogoMarquee() {
 }
 
 export default function Page() {
+  const [showSuccess, setShowSuccess] = useState(false);
+
   return (
     <div className="bg-[#05050a] min-h-screen text-white overflow-x-hidden selection:bg-brand-primary/30">
       <VideoBackground overlayOpacity={0.30} />
@@ -197,29 +200,20 @@ export default function Page() {
                     });
                   }
 
-                  // 2. Meta Conversions API (Server)
+                  // 2. Lead Proxy (Meta CAPI + n8n Server-side)
                   try {
-                    fetch('/api/fb-conversions', {
+                    const response = await fetch('/api/fb-conversions', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify(data),
                     });
+                    
+                    if (response.ok) {
+                      setShowSuccess(true);
+                    }
                   } catch (err) {
-                    console.error('CAPI Error:', err);
+                    console.error('Lead Error:', err);
                   }
-
-                  // 3. n8n Webhook Integration
-                  try {
-                    fetch('https://n8n.amais.io/webhook/1bc59109-831d-4154-932e-a3431a4b5015', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify(data),
-                    });
-                  } catch (err) {
-                    console.error('N8N Error:', err);
-                  }
-
-                  alert('Solicitação enviada com sucesso! Entraremos em contato em breve.');
                 }}
               >
                 <div className="space-y-1">

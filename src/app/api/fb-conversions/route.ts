@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       ],
     };
 
-    const response = await fetch(
+    const fbResponse = await fetch(
       `https://graph.facebook.com/v18.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
       {
         method: 'POST',
@@ -48,8 +48,27 @@ export async function POST(req: Request) {
       }
     );
 
-    const result = await response.json();
-    return NextResponse.json(result);
+    // 2. n8n Webhook Integration (Server-side)
+    const N8N_WEBHOOK_URL = 'https://n8n.amais.io/webhook/1bc59109-831d-4154-932e-a3431a4b5015';
+    try {
+      await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...body,
+          source: 'Landing Page - Estratégia Matadora',
+          submittedAt: new Date().toISOString()
+        }),
+      });
+    } catch (n8nError) {
+      console.error('N8N Server-side Error:', n8nError);
+    }
+
+    const result = await fbResponse.json();
+    return NextResponse.json({
+      meta: result,
+      n8n: 'success'
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
