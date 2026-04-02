@@ -28,8 +28,8 @@ export function GlassCard({
       // Estilo Default
       variant === 'default' && "bg-bg-card border-border-subtle shadow-[0_8px_32px_rgba(0,0,0,0.04)]",
       
-      // Estilo Blue (Glow Intenso)
-      variant === 'blue' && "bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 border-brand-primary/40 shadow-[0_0_40px_rgba(0,85,254,0.25)]",
+      // Estilo Blue (Glow Intenso SEM fundo sólido)
+      variant === 'blue' && "bg-bg-card border-brand-primary/60 shadow-[0_0_50px_rgba(0,85,254,0.30)]",
       
       // Mobile-only intensification for blue variant
       variant === 'blue' && "sm:bg-bg-card sm:border-border-subtle sm:shadow-none",

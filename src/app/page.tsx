@@ -164,7 +164,7 @@ export default function Page() {
             animate="show"
             transition={{ delay: 0.3 }}
           >
-            <GlassCard variant="blue" glowTopRight className="p-8 border-brand-primary/60 shadow-[0_0_50px_rgba(0,85,254,0.35)] bg-gradient-to-br from-brand-primary/20 to-transparent">
+            <GlassCard variant="blue" glowTopRight className="p-8 border-brand-primary/60 shadow-[0_0_60px_rgba(0,85,254,0.40)]">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold mb-2">Agende seu diagnóstico</h2>
                 <p className="text-text-secondary text-sm">Preencha os dados abaixo para participar do mapeamento:</p>
@@ -172,48 +172,48 @@ export default function Page() {
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Qual seu cargo na instituição?</label>
-                  <select defaultValue="" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm appearance-none cursor-pointer">
-                    <option value="" disabled>Selecione seu cargo</option>
-                    <option value="mantenedor">Mantenedor</option>
-                    <option value="diretor">Diretor</option>
-                    <option value="professor">Professor</option>
-                    <option value="gestor">Gestor</option>
-                    <option value="coordenador">Coordenador Pedagógico</option>
-                    <option value="secretario">Secretário Escolar</option>
+                  <select defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                    <option value="" disabled className="bg-[#05050a]">Selecione seu cargo</option>
+                    <option value="mantenedor" className="bg-[#05050a]">Mantenedor</option>
+                    <option value="diretor" className="bg-[#05050a]">Diretor</option>
+                    <option value="professor" className="bg-[#05050a]">Professor</option>
+                    <option value="gestor" className="bg-[#05050a]">Gestor</option>
+                    <option value="coordenador" className="bg-[#05050a]">Coordenador Pedagógico</option>
+                    <option value="secretario" className="bg-[#05050a]">Secretário Escolar</option>
                   </select>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Segmento</label>
-                    <select defaultValue="" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm appearance-none cursor-pointer">
-                      <option value="" disabled>Selecione</option>
-                      <option value="basica">Educação básica</option>
-                      <option value="faculdade">Faculdade</option>
-                      <option value="tecnico">Curso Técnico</option>
-                      <option value="profissionalizante">Curso Profissionalizante</option>
-                      <option value="idiomas">Curso de Idiomas</option>
+                    <select defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                      <option value="" disabled className="bg-[#05050a]">Selecione</option>
+                      <option value="basica" className="bg-[#05050a]">Educação básica</option>
+                      <option value="faculdade" className="bg-[#05050a]">Faculdade</option>
+                      <option value="tecnico" className="bg-[#05050a]">Curso Técnico</option>
+                      <option value="profissionalizante" className="bg-[#05050a]">Curso Profissionalizante</option>
+                      <option value="idiomas" className="bg-[#05050a]">Curso de Idiomas</option>
                     </select>
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Nº de Alunos</label>
-                    <select defaultValue="" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm appearance-none cursor-pointer">
-                      <option value="" disabled>Selecione</option>
-                      <option value="ate500">Até 500 alunos</option>
-                      <option value="501a1000">501 a 1000 alunos</option>
-                      <option value="acima1000">Acima de 1000 alunos</option>
+                    <select defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                      <option value="" disabled className="bg-[#05050a]">Selecione</option>
+                      <option value="ate500" className="bg-[#05050a]">Até 500 alunos</option>
+                      <option value="501a1000" className="bg-[#05050a]">501 a 1000 alunos</option>
+                      <option value="acima1000" className="bg-[#05050a]">Acima de 1000 alunos</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Instituição de Ensino</label>
-                  <input type="text" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm" placeholder="Nome da instituição" />
+                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="Nome da instituição" />
                 </div>
 
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Nome Completo</label>
-                  <input type="text" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm" placeholder="Seu nome" />
+                  <input type="text" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="Seu nome" />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -229,12 +229,12 @@ export default function Page() {
                         if (v.length > 9) v = `${v.slice(0, 10)}-${v.slice(10)}`;
                         e.target.value = v;
                       }}
-                      className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm"
                     />
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">E-mail</label>
-                    <input type="email" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm" placeholder="contato@instituicao.com.br" />
+                    <input type="email" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm backdrop-blur-sm" placeholder="contato@instituicao.com.br" />
                   </div>
                 </div>
 
@@ -352,37 +352,45 @@ export default function Page() {
       <div className="relative z-10 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
         <section className="relative z-10 max-w-[1120px] mx-auto px-6 xl:px-0">
-          <GlassCard variant="blue" className="p-6 sm:p-10 md:p-16 relative overflow-hidden border-brand-primary/40 shadow-[0_0_40px_rgba(0,85,254,0.20)]">
-            <div className="absolute top-0 right-0 w-full h-full bg-brand-primary/5 pointer-events-none" />
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-12 items-center relative z-10 w-full">
-              <Reveal className="w-full text-center md:text-left">
-                <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold mb-4">O que sua escola recebe</motion.h2>
-                <motion.p variants={fadeIn} className="text-lg md:text-xl text-text-secondary mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
-                  Um panorama detalhado e estratégico gerado por especialistas para identificar falhas e estancar a perda de receita da sua instituição.
-                </motion.p>
-                <motion.div variants={fadeIn} className="w-16 h-1 bg-brand-primary rounded-full shadow-[0_0_10px_rgba(11,92,255,0.5)] mx-auto md:mx-0" />
-              </Reveal>
+          <GlassCard variant="blue" className="p-8 md:p-16 relative overflow-hidden border-brand-primary/60 shadow-[0_0_60px_rgba(0,85,254,0.40)]">
+            
+            <div className="relative z-10 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div>
+                <Reveal>
+                  <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
+                    O que sua escola recebe
+                  </motion.h2>
+                  <motion.p variants={fadeIn} className="text-lg md:text-xl text-text-secondary mb-10 leading-relaxed max-w-xl">
+                    Um panorama detalhado e estratégico gerado por especialistas para identificar falhas e estancar a perda de receita da sua instituição.
+                  </motion.p>
+                  <motion.div variants={fadeIn} className="w-16 h-1 bg-brand-primary rounded-full shadow-[0_0_15px_rgba(11,92,255,0.7)]" />
+                </Reveal>
+              </div>
 
-              <Reveal delay={0.09} className="w-full">
-                <ul className="space-y-4 w-full p-0 m-0">
-                  {[
-                    'Diagnóstico gratuito da inadimplência',
-                    'Análise dos processos atuais',
-                    'Recomendações práticas de melhoria',
-                    'Visão externa especializada',
-                    'Conversa com especialista em cobrança',
-                  ].map((item, i) => (
-                    <motion.li
-                      key={i}
-                      variants={fadeRight}
-                      className="flex items-center gap-4 text-base md:text-lg p-4 md:p-5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-brand-primary/20 transition-all shadow-sm list-none"
-                    >
-                      <CheckCircle size={24} weight="fill" className="text-accent-success shrink-0 drop-shadow-[0_0_10px_rgba(52,211,153,0.3)]" />
-                      <span className="font-medium text-text-primary text-left">{item}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </Reveal>
+              <div>
+                <Reveal delay={0.1}>
+                  <div className="space-y-4">
+                    {[
+                      'Diagnóstico gratuito da inadimplência',
+                      'Análise dos processos atuais',
+                      'Recomendações práticas de melhoria',
+                      'Visão externa especializada',
+                      'Conversa com especialista em cobrança',
+                    ].map((item, i) => (
+                      <motion.div
+                        key={i}
+                        variants={fadeRight}
+                        className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 hover:border-brand-primary/40 transition-all duration-300 shadow-lg group"
+                      >
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent-success/10 flex items-center justify-center group-hover:bg-accent-success/20 transition-colors">
+                          <CheckCircle size={24} weight="fill" className="text-accent-success drop-shadow-[0_0_8px_rgba(52,211,153,0.4)]" />
+                        </div>
+                        <span className="font-bold text-base md:text-lg text-text-primary group-hover:text-white transition-colors">{item}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </Reveal>
+              </div>
             </div>
           </GlassCard>
         </section>
