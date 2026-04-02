@@ -45,6 +45,7 @@ export default function RootLayout({
         className={`${dmSans.variable} ${inter.variable} antialiased min-h-screen bg-bg-base text-text-primary`}
         suppressHydrationWarning
       >
+        <MetaPixel />
         {children}
         <SpeedInsights />
       </body>
