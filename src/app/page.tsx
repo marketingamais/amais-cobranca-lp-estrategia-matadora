@@ -259,7 +259,7 @@ export default function Page() {
           >
             <RemotionPlayer />
           </motion.div>
-          <div className="space-y-6">
+          <div className="space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start">
             <motion.div variants={fadeIn} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-sm font-bold text-brand-primary">
               O cenário atual
             </motion.div>
@@ -274,7 +274,7 @@ export default function Page() {
                 'Amais está realizando um mapeamento com escolas de Recife para entender como lidar com esse cenário.',
                 'Esta iniciativa consultiva visa gerar uma visão clara sobre oportunidades reais de melhoria.',
               ].map((p, i) => (
-                <motion.p key={i} variants={fadeIn}>{p}</motion.p>
+                <motion.p key={i} variants={fadeIn} className="max-w-xl lg:max-w-none">{p}</motion.p>
               ))}
             </motion.div>
           </div>
@@ -355,7 +355,7 @@ export default function Page() {
           <GlassCard variant="blue" className="p-8 md:p-16 relative overflow-hidden border-brand-primary/60 shadow-[0_0_60px_rgba(0,85,254,0.40)]">
             
             <div className="relative z-10 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div>
+              <div className="text-center md:text-left flex flex-col items-center md:items-start">
                 <Reveal>
                   <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
                     O que sua escola recebe
@@ -367,7 +367,7 @@ export default function Page() {
                 </Reveal>
               </div>
 
-              <div>
+              <div className="w-full">
                 <Reveal delay={0.1}>
                   <div className="space-y-4">
                     {[
@@ -380,10 +380,10 @@ export default function Page() {
                       <motion.div
                         key={i}
                         variants={fadeRight}
-                        className="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 hover:border-brand-primary/40 transition-all duration-300 shadow-lg group"
+                        className="flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/15 hover:border-brand-primary/40 transition-all duration-300 shadow-lg group text-center sm:text-left"
                       >
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-accent-success/10 flex items-center justify-center group-hover:bg-accent-success/20 transition-colors">
-                          <CheckCircle size={24} weight="fill" className="text-accent-success drop-shadow-[0_0_8px_rgba(52,211,153,0.4)]" />
+                        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-accent-success/10 flex items-center justify-center group-hover:bg-accent-success/20 transition-colors">
+                          <CheckCircle size={28} weight="fill" className="text-accent-success drop-shadow-[0_0_8px_rgba(52,211,153,0.4)]" />
                         </div>
                         <span className="font-bold text-base md:text-lg text-text-primary group-hover:text-white transition-colors">{item}</span>
                       </motion.div>
