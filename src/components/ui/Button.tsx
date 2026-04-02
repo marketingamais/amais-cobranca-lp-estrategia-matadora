@@ -24,9 +24,9 @@ export const Button = forwardRef<HTMLButtonElement, MotionButtonProps>(
     };
 
     const sizes = {
-      sm: "px-4 py-2 text-sm",
-      md: "px-6 py-3 text-base font-medium",
-      lg: "px-8 py-4 text-lg font-bold"
+      sm: "px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm whitespace-nowrap",
+      md: "px-4 py-2.5 md:px-6 md:py-3 text-sm md:text-base font-medium whitespace-nowrap",
+      lg: "px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-bold whitespace-nowrap"
     };
 
     return (

@@ -164,7 +164,7 @@ export default function Page() {
             animate="show"
             transition={{ delay: 0.3 }}
           >
-            <GlassCard glowTopRight className="p-8 border-brand-primary/30">
+            <GlassCard glowTopRight className="p-8 border-brand-primary/50 shadow-[0_0_30px_rgba(0,85,254,0.25)]">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold mb-2">Agende seu diagnóstico</h2>
                 <p className="text-text-secondary text-sm">Preencha os dados abaixo para participar do mapeamento:</p>
@@ -206,15 +206,9 @@ export default function Page() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Instituição de Ensino</label>
-                    <input type="text" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm" placeholder="Nome da instituição" />
-                  </div>
-                  <div className="space-y-1">
-                    <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Bairro</label>
-                    <input type="text" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm" placeholder="Onde fica a escola?" />
-                  </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Instituição de Ensino</label>
+                  <input type="text" className="w-full bg-bg-base border border-border-subtle rounded-lg px-3 py-2.5 text-text-primary focus:outline-none focus:border-brand-primary transition-colors text-sm" placeholder="Nome da instituição" />
                 </div>
 
                 <div className="space-y-1">
@@ -259,7 +253,10 @@ export default function Page() {
       {/* SEÇÃO 2 — CONTEXTO */}
       <div id="diagnostico" className="relative z-10 bg-[#f4f4f4] text-[#05050a] py-24 border-y border-black/5">
         <Reveal className="grid lg:grid-cols-2 gap-20 items-stretch max-w-[1440px] mx-auto px-6 xl:px-0">
-          <motion.div variants={fadeLeft} className="w-full relative min-h-[600px] lg:min-h-full rounded-3xl overflow-hidden border border-black/5 shadow-2xl bg-white">
+          <motion.div 
+            variants={fadeLeft} 
+            className="w-full relative min-h-[350px] md:min-h-[500px] lg:min-h-full rounded-3xl overflow-hidden border border-black/5 shadow-2xl bg-white"
+          >
             <RemotionPlayer />
           </motion.div>
           <div className="space-y-6">
@@ -311,20 +308,20 @@ export default function Page() {
               { title: 'Falta de processo',         desc: 'Equipe perdendo tempo com rotinas descentralizadas, planilhas e cobranças manuais.',         icon: ChartLineUp },
             ].map((item, i) => (
               <motion.div key={i} variants={scaleIn} className="relative group cursor-pointer h-full">
-                <GlassCard className="flex flex-col items-center justify-start text-center p-8 h-full relative overflow-hidden transition-all duration-500 border-white/5 hover:border-brand-primary/40 hover:bg-brand-primary/[0.02]">
-                  <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-brand-primary/30 blur-[40px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <GlassCard className="flex flex-col items-center justify-start text-center p-8 h-full relative overflow-hidden transition-all duration-500 border-white/10 sm:border-white/5 hover:border-brand-primary/40 hover:bg-brand-primary/[0.02] bg-brand-primary/[0.03] sm:bg-transparent shadow-[0_0_20px_rgba(0,85,254,0.1)] sm:shadow-none">
+                  <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-brand-primary/30 blur-[40px] rounded-full opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="flex items-center justify-center w-full mb-10 mt-4">
-                    <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 text-text-secondary group-hover:text-brand-glow flex items-center justify-center transition-all duration-300 group-hover:bg-brand-primary/10 group-hover:border-brand-primary/30 shadow-sm shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-brand-primary/10 sm:bg-white/5 border border-brand-primary/30 sm:border-white/10 text-brand-glow sm:text-text-secondary group-hover:text-brand-glow flex items-center justify-center transition-all duration-300 group-hover:bg-brand-primary/10 group-hover:border-brand-primary/30 shadow-sm shrink-0">
                       <item.icon size={24} weight="duotone" />
                     </div>
                   </div>
 
                   <div className="w-full">
-                    <h3 className="font-bold text-xl text-text-primary mb-3 tracking-tight leading-tight transition-colors duration-300 group-hover:text-white line-clamp-2 min-h-[3rem] flex items-center justify-center">{item.title}</h3>
-                    <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out">
+                    <h3 className="font-bold text-xl text-white sm:text-text-primary mb-3 tracking-tight leading-tight transition-colors duration-300 group-hover:text-white line-clamp-2 min-h-[3rem] flex items-center justify-center">{item.title}</h3>
+                    <div className="grid grid-rows-[1fr] sm:grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out">
                       <div className="overflow-hidden">
-                        <p className="text-text-secondary text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 max-w-[220px] mx-auto">{item.desc}</p>
+                        <p className="text-text-secondary text-sm leading-relaxed opacity-100 sm:opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 max-w-[220px] mx-auto">{item.desc}</p>
                       </div>
                     </div>
                   </div>
