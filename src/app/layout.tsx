@@ -19,8 +19,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Mapeamento de Inadimplência | Amais Cobrança',
-  description: 'Diagnóstico gratuito e presencial sobre seus processos de cobrança e recuperação de mensalidades para escolas privadas de Recife.',
+  title: 'Amais Cobrança - Mapeamento de Inadimplência em Recife',
+  description: 'Diagnóstico gratuito e presencial para gestão de inadimplência em instituições de ensino de Recife.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
   other: {
     'theme-color': '#05050a',
   },
