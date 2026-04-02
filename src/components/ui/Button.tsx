@@ -9,12 +9,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type MotionButtonProps = Omit<HTMLMotionProps<"button">, "onAnimationStart" | "onDragStart" | "onDragEnd" | "onDrag" | "ref"> & {
   variant?: 'primary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
-}
-
-type MotionButtonProps = ButtonProps & Omit<HTMLMotionProps<"button">, keyof ButtonProps | "onAnimationStart" | "onDragStart" | "onDragEnd" | "onDrag" | "ref">;
+};
 
 export const Button = forwardRef<HTMLButtonElement, MotionButtonProps>(
   ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
