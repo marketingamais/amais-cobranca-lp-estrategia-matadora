@@ -178,6 +178,13 @@ export default function Page() {
                 onSubmit={async (e) => {
                   e.preventDefault();
                   const formData = new FormData(e.currentTarget);
+                  
+                  // Helper to get selected label text instead of value
+                  const getLabel = (name: string) => {
+                    const el = (e.currentTarget.elements.namedItem(name) as HTMLSelectElement);
+                    return el?.options[el.selectedIndex]?.text || '';
+                  };
+
                   const data = {
                     email: formData.get('email') as string,
                     phone: formData.get('phone') as string,
@@ -185,9 +192,9 @@ export default function Page() {
                     firstName: (formData.get('fullName') as string)?.split(' ')[0] || '',
                     lastName: (formData.get('fullName') as string)?.split(' ').slice(1).join(' ') || '',
                     institution: formData.get('institution') as string,
-                    role: formData.get('role') as string,
-                    segment: formData.get('segment') as string,
-                    students: formData.get('students') as string,
+                    role: getLabel('role'),
+                    segment: getLabel('segment'),
+                    students: getLabel('students'),
                     submittedAt: new Date().toISOString(),
                   };
 
