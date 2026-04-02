@@ -127,6 +127,7 @@ function LogoMarquee() {
 
 export default function Page() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <div className="bg-[#05050a] min-h-screen text-white overflow-x-hidden selection:bg-brand-primary/30">
@@ -202,6 +203,7 @@ export default function Page() {
 
                   // 2. Lead Proxy (Meta CAPI + n8n Server-side)
                   try {
+                    setIsSubmitting(true);
                     const response = await fetch('/api/fb-conversions', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
@@ -210,9 +212,12 @@ export default function Page() {
                     
                     if (response.ok) {
                       setShowSuccess(true);
+                      (e.target as HTMLFormElement).reset();
                     }
                   } catch (err) {
                     console.error('Lead Error:', err);
+                  } finally {
+                    setIsSubmitting(false);
                   }
                 }}
               >
@@ -286,8 +291,12 @@ export default function Page() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full py-5 text-lg font-bold shadow-[0_0_20px_rgba(11,92,255,0.3)] hover:shadow-[0_0_30px_rgba(11,92,255,0.5)] transition-all">
-                  AGENDAR DIAGNÓSTICO
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full py-5 text-lg font-bold shadow-[0_0_20px_rgba(11,92,255,0.3)] hover:shadow-[0_0_30px_rgba(11,92,255,0.5)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'ENVIANDO...' : 'AGENDAR DIAGNÓSTICO'}
                 </Button>
               </form>
             </GlassCard>

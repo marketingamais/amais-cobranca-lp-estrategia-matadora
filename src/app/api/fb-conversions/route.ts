@@ -4,7 +4,7 @@ import crypto from 'crypto';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, phone, firstName, lastName, city, zip } = body;
+    const { email, phone, firstName, lastName, institution, role, segment, students } = body;
 
     const PIXEL_ID = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
     const ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN;
@@ -30,9 +30,9 @@ export async function POST(req: Request) {
             ph: [hashData(phone)],
             fn: [hashData(firstName)],
             ln: [hashData(lastName)],
-            ct: [hashData(city || 'recife')],
+            ct: [hashData('recife')],
             st: [hashData('pe')],
-            zp: [hashData(zip)],
+            zp: [hashData('50000000')],
           },
           test_event_code: TEST_EVENT_CODE, // Only for testing in Events Manager
         },
