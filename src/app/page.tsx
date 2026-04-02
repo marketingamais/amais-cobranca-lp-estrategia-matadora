@@ -179,12 +179,6 @@ export default function Page() {
                   e.preventDefault();
                   const formData = new FormData(e.currentTarget);
                   
-                  // Helper to get selected label text instead of value
-                  const getLabel = (name: string) => {
-                    const el = (e.currentTarget.elements.namedItem(name) as HTMLSelectElement);
-                    return el?.options[el.selectedIndex]?.text || '';
-                  };
-
                   const data = {
                     email: formData.get('email') as string,
                     phone: formData.get('phone') as string,
@@ -192,9 +186,9 @@ export default function Page() {
                     firstName: (formData.get('fullName') as string)?.split(' ')[0] || '',
                     lastName: (formData.get('fullName') as string)?.split(' ').slice(1).join(' ') || '',
                     institution: formData.get('institution') as string,
-                    role: getLabel('role'),
-                    segment: getLabel('segment'),
-                    students: getLabel('students'),
+                    role: formData.get('role') as string,
+                    segment: formData.get('segment') as string,
+                    students: formData.get('students') as string,
                     submittedAt: new Date().toISOString(),
                   };
 
@@ -237,12 +231,12 @@ export default function Page() {
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Qual seu cargo na instituição?</label>
                   <select name="role" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                     <option value="" disabled className="bg-[#05050a]">Selecione seu cargo</option>
-                    <option value="mantenedor" className="bg-[#05050a]">Mantenedor</option>
-                    <option value="diretor" className="bg-[#05050a]">Diretor</option>
-                    <option value="professor" className="bg-[#05050a]">Professor</option>
-                    <option value="gestor" className="bg-[#05050a]">Gestor</option>
-                    <option value="coordenador" className="bg-[#05050a]">Coordenador Pedagógico</option>
-                    <option value="secretario" className="bg-[#05050a]">Secretário Escolar</option>
+                    <option value="Mantenedor" className="bg-[#05050a]">Mantenedor</option>
+                    <option value="Diretor" className="bg-[#05050a]">Diretor</option>
+                    <option value="Professor" className="bg-[#05050a]">Professor</option>
+                    <option value="Gestor" className="bg-[#05050a]">Gestor</option>
+                    <option value="Coordenador Pedagógico" className="bg-[#05050a]">Coordenador Pedagógico</option>
+                    <option value="Secretário Escolar" className="bg-[#05050a]">Secretário Escolar</option>
                   </select>
                 </div>
 
@@ -251,20 +245,20 @@ export default function Page() {
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Segmento</label>
                     <select name="segment" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                       <option value="" disabled className="bg-[#05050a]">Selecione</option>
-                      <option value="basica" className="bg-[#05050a]">Educação básica</option>
-                      <option value="faculdade" className="bg-[#05050a]">Faculdade</option>
-                      <option value="tecnico" className="bg-[#05050a]">Curso Técnico</option>
-                      <option value="profissionalizante" className="bg-[#05050a]">Curso Profissionalizante</option>
-                      <option value="idiomas" className="bg-[#05050a]">Curso de Idiomas</option>
+                      <option value="Educação básica" className="bg-[#05050a]">Educação básica</option>
+                      <option value="Faculdade" className="bg-[#05050a]">Faculdade</option>
+                      <option value="Curso Técnico" className="bg-[#05050a]">Curso Técnico</option>
+                      <option value="Curso Profissionalizante" className="bg-[#05050a]">Curso Profissionalizante</option>
+                      <option value="Curso de Idiomas" className="bg-[#05050a]">Curso de Idiomas</option>
                     </select>
                   </div>
                   <div className="space-y-1">
                     <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Nº de Alunos</label>
                     <select name="students" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                       <option value="" disabled className="bg-[#05050a]">Selecione</option>
-                      <option value="ate500" className="bg-[#05050a]">Até 500 alunos</option>
-                      <option value="501a1000" className="bg-[#05050a]">501 a 1000 alunos</option>
-                      <option value="acima1000" className="bg-[#05050a]">Acima de 1000 alunos</option>
+                      <option value="Até 500 alunos" className="bg-[#05050a]">Até 500 alunos</option>
+                      <option value="501 a 1000 alunos" className="bg-[#05050a]">501 a 1000 alunos</option>
+                      <option value="Acima de 1000 alunos" className="bg-[#05050a]">Acima de 1000 alunos</option>
                     </select>
                   </div>
                 </div>
