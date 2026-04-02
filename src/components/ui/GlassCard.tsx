@@ -10,24 +10,48 @@ interface GlassCardProps {
   children: ReactNode;
   className?: string;
   glowTopRight?: boolean;
+  variant?: 'default' | 'blue';
+  noPadding?: boolean;
 }
 
-export function GlassCard({ children, className, glowTopRight = false }: GlassCardProps) {
+export function GlassCard({ 
+  children, 
+  className, 
+  glowTopRight = false, 
+  variant = 'default',
+  noPadding = false 
+}: GlassCardProps) {
   return (
     <div className={cn(
-      "relative overflow-hidden rounded-2xl bg-bg-card border-[0.4px] border-border-subtle shadow-[0_8px_32px_rgba(0,0,0,0.04)]",
+      "relative overflow-hidden rounded-2xl border-[0.4px] transition-all duration-500",
+      
+      // Estilo Default
+      variant === 'default' && "bg-bg-card border-border-subtle shadow-[0_8px_32px_rgba(0,0,0,0.04)]",
+      
+      // Estilo Blue (Glow Intenso)
+      variant === 'blue' && "bg-gradient-to-br from-brand-primary/10 to-brand-primary/5 border-brand-primary/40 shadow-[0_0_40px_rgba(0,85,254,0.25)]",
+      
+      // Mobile-only intensification for blue variant
+      variant === 'blue' && "sm:bg-bg-card sm:border-border-subtle sm:shadow-none",
+
       className
     )}>
       {/* Internal Glassmorphic Glow */}
-      {glowTopRight && (
+      {(glowTopRight || variant === 'blue') && (
         <div 
-          className="absolute -top-[40px] -right-[40px] w-[200px] h-[200px] bg-brand-primary rounded-full opacity-30 pointer-events-none"
+          className={cn(
+            "absolute -top-[40px] -right-[40px] w-[200px] h-[200px] rounded-full pointer-events-none transition-opacity duration-500",
+            variant === 'blue' ? "bg-brand-primary opacity-40 sm:opacity-20" : "bg-brand-primary opacity-30"
+          )}
           style={{ filter: 'blur(80px)' }}
         />
       )}
       
-      {/* Content wrapper to stay above the glow */}
-      <div className="relative z-10 w-full h-full p-6 md:p-8">
+      {/* Content wrapper */}
+      <div className={cn(
+        "relative z-10 w-full h-full",
+        !noPadding && "p-6 md:p-8"
+      )}>
         {children}
       </div>
     </div>

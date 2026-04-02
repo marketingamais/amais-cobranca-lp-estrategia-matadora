@@ -164,7 +164,7 @@ export default function Page() {
             animate="show"
             transition={{ delay: 0.3 }}
           >
-            <GlassCard glowTopRight className="p-8 border-brand-primary/50 shadow-[0_0_30px_rgba(0,85,254,0.25)]">
+            <GlassCard variant="blue" glowTopRight className="p-8 border-brand-primary/60 shadow-[0_0_50px_rgba(0,85,254,0.35)] bg-gradient-to-br from-brand-primary/20 to-transparent">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold mb-2">Agende seu diagnóstico</h2>
                 <p className="text-text-secondary text-sm">Preencha os dados abaixo para participar do mapeamento:</p>
@@ -308,7 +308,7 @@ export default function Page() {
               { title: 'Falta de processo',         desc: 'Equipe perdendo tempo com rotinas descentralizadas, planilhas e cobranças manuais.',         icon: ChartLineUp },
             ].map((item, i) => (
               <motion.div key={i} variants={scaleIn} className="relative group cursor-pointer h-full">
-                <GlassCard className="flex flex-col items-center justify-start text-center p-8 h-full relative overflow-hidden transition-all duration-500 border-white/10 sm:border-white/5 hover:border-brand-primary/40 hover:bg-brand-primary/[0.02] bg-brand-primary/[0.03] sm:bg-transparent shadow-[0_0_20px_rgba(0,85,254,0.1)] sm:shadow-none">
+                <GlassCard variant="blue" className="flex flex-col items-center justify-start text-center p-8 h-full relative overflow-hidden transition-all duration-500 border-brand-primary/50 sm:border-white/5 bg-brand-primary/10 sm:bg-transparent shadow-[0_0_30px_rgba(0,85,254,0.15)] sm:shadow-none">
                   <div className="absolute -bottom-12 -right-12 w-32 h-32 bg-brand-primary/30 blur-[40px] rounded-full opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="flex items-center justify-center w-full mb-10 mt-4">
@@ -352,7 +352,7 @@ export default function Page() {
       <div className="relative z-10 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-black/55 pointer-events-none" />
         <section className="relative z-10 max-w-[1120px] mx-auto px-6 xl:px-0">
-          <GlassCard className="p-10 md:p-16 relative overflow-hidden">
+          <GlassCard variant="blue" className="p-10 md:p-16 relative overflow-hidden border-brand-primary/40 shadow-[0_0_40px_rgba(0,85,254,0.20)]">
             <div className="absolute top-0 right-0 w-1/2 h-full bg-[radial-gradient(ellipse_at_top_right,_var(--color-brand-primary)_0%,_transparent_70%)] opacity-10" />
             <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
               <Reveal>
