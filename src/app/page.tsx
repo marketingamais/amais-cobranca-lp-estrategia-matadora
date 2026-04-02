@@ -177,10 +177,14 @@ export default function Page() {
                   const data = {
                     email: formData.get('email') as string,
                     phone: formData.get('phone') as string,
+                    fullName: formData.get('fullName') as string,
                     firstName: (formData.get('fullName') as string)?.split(' ')[0] || '',
                     lastName: (formData.get('fullName') as string)?.split(' ').slice(1).join(' ') || '',
                     institution: formData.get('institution') as string,
                     role: formData.get('role') as string,
+                    segment: formData.get('segment') as string,
+                    students: formData.get('students') as string,
+                    submittedAt: new Date().toISOString(),
                   };
 
                   // 1. Meta Pixel track (Browser)
@@ -195,13 +199,24 @@ export default function Page() {
 
                   // 2. Meta Conversions API (Server)
                   try {
-                    await fetch('/api/fb-conversions', {
+                    fetch('/api/fb-conversions', {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify(data),
                     });
                   } catch (err) {
                     console.error('CAPI Error:', err);
+                  }
+
+                  // 3. n8n Webhook Integration
+                  try {
+                    fetch('https://n8n.amais.io/webhook/1bc59109-831d-4154-932e-a3431a4b5015', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(data),
+                    });
+                  } catch (err) {
+                    console.error('N8N Error:', err);
                   }
 
                   alert('Solicitação enviada com sucesso! Entraremos em contato em breve.');
