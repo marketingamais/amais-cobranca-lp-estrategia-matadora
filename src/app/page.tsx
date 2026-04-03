@@ -126,7 +126,12 @@ function LogoMarquee() {
 }
 
 // Modal Interno para máxima estabilidade
-const SuccessModalComponent = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+interface SuccessModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const SuccessModalComponent = ({ isOpen, onClose }: SuccessModalProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -150,6 +155,7 @@ const SuccessModalComponent = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
             <button
               onClick={onClose}
               className="absolute top-4 right-4 p-2 text-text-secondary hover:text-white transition-colors"
+              type="button"
             >
               <X size={20} />
             </button>
@@ -178,6 +184,7 @@ const SuccessModalComponent = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
               <Button
                 onClick={onClose}
                 className="w-full py-4 font-bold tracking-wide"
+                type="button"
               >
                 ENTENDIDO
               </Button>
