@@ -19,8 +19,16 @@ export const MetaPixel = () => {
     if (!pixelId) return;
 
     if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'PageView');
-      console.log('🔵 Meta Pixel: PageView fired for', pathname);
+      const track = () => {
+        window.fbq('track', 'PageView');
+        console.log('🔵 Meta Pixel: PageView fired for', pathname);
+      };
+
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(track);
+      } else {
+        setTimeout(track, 1000);
+      }
     }
   }, [pathname, pixelId]);
 

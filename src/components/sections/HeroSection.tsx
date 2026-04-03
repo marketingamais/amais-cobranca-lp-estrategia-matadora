@@ -10,8 +10,8 @@ import { useState } from 'react';
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+  hidden: { opacity: 0, y: 10 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
 };
 const fadeIn = {
   hidden: { opacity: 0, y: 16 },

@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useEffect, useState } from 'react';
 
 interface VideoBackgroundProps {
@@ -14,46 +16,70 @@ export function VideoBackground({
   className = '',
 }: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.play().catch(() => {
-        document.addEventListener('click', () => video.play(), { once: true });
-      });
+    // 🧠 Estratégia Agressiva: Só carrega o vídeo DEPOIS que tudo o que é crítico terminou.
+    // Isso libera a rede para o Texto (LCP) e Fontes.
+    const startLoading = () => {
+      setShouldLoadVideo(true);
+    };
+
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(startLoading, { timeout: 3000 });
+    } else {
+      setTimeout(startLoading, 1500);
     }
   }, []);
+
+  useEffect(() => {
+    if (shouldLoadVideo && videoRef.current) {
+      const video = videoRef.current;
+      video.play().catch(() => {
+        // Fallback para play após interação
+        const playOnInteraction = () => {
+          video.play();
+          document.removeEventListener('click', playOnInteraction);
+        };
+        document.addEventListener('click', playOnInteraction, { once: true });
+      });
+    }
+  }, [shouldLoadVideo]);
 
   return (
     <div
       className={`fixed inset-0 overflow-hidden pointer-events-none ${className}`}
-      style={{ zIndex: 0, backgroundColor: '#05050a' }}
+      style={{ 
+        zIndex: 0, 
+        backgroundColor: '#05050a',
+        // ── Placeholder Instantâneo (0 Bytes) ──
+        background: 'radial-gradient(circle at top right, #0a101f 0%, #05050a 100%)'
+      }}
     >
-      {/* ── 1. Vídeo em loop ── */}
-      <video
-        ref={videoRef}
-        src="/bg-video.mp4"
-        poster="/hero-poster.png"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        onLoadedData={() => setIsLoaded(true)}
-        // @ts-ignore - fetchPriority is supported in modern browsers for LCP optimization
-        fetchPriority="high" 
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center center',
-          opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 1s ease-in-out',
-        }}
-      />
+      {/* ── 1. Vídeo carregado sob demanda ── */}
+      {shouldLoadVideo && (
+        <video
+          ref={videoRef}
+          src="/bg-video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="none"
+          onLoadedData={() => setIsLoaded(true)}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center center',
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 1.5s ease-in-out',
+          }}
+        />
+      )}
 
       {/* ── 2. Blur overlay ── */}
       <div

@@ -40,8 +40,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* ── 1. Preload do Poster LCP para performance máxima ── */}
-        <link rel="preload" href="/hero-poster.png" as="image" fetchPriority="high" />
+        {/* Usamos apenas CSS crítico — removemos o preload da imagem de 700KB que estava bloqueando a rede */}
       </head>
       <body 
         className={`${dmSans.variable} ${inter.variable} antialiased min-h-screen bg-bg-base text-text-primary`}
