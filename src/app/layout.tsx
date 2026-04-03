@@ -3,6 +3,7 @@ import { DM_Sans, Inter } from 'next/font/google';
 import './globals.css';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MetaPixel } from '@/components/analytics/MetaPixel';
+import { Clarity } from '@/components/analytics/Clarity';
 
 const dmSans = DM_Sans({ 
   subsets: ['latin'], 
@@ -46,6 +47,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <MetaPixel />
+        <Clarity />
         {children}
         <SpeedInsights />
       </body>
