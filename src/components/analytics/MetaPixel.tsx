@@ -12,8 +12,8 @@ declare global {
 
 export const MetaPixel = () => {
   const pathname = usePathname();
-  // Fallback para o ID fornecido pelo Facebook para garantir o disparo
-  const pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '1956609178559019';
+  // Limpeza absoluta do ID para evitar erros de sintaxe e garantir inicialização
+  const pixelId = (process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '1956609178559019').trim();
 
   useEffect(() => {
     if (!pixelId) return;

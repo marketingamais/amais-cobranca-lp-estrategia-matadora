@@ -255,6 +255,7 @@ export default function Page() {
                     segment: formData.get('segment') as string,
                     students: formData.get('students') as string,
                     submittedAt: new Date().toISOString(),
+                    test_event_code: 'TEST34526', // Adicionado para teste do usuário
                   };
 
                   // 1. Meta Pixel track (Browser)

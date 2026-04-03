@@ -4,11 +4,11 @@ import crypto from 'crypto';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { email, phone, firstName, lastName, institution, role, segment, students } = body;
+    const { email, phone, firstName, lastName, institution, role, segment, students, test_event_code } = body;
 
     const PIXEL_ID = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
     const ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN;
-    const TEST_EVENT_CODE = process.env.FB_TEST_EVENT_CODE;
+    const TEST_EVENT_CODE = test_event_code || process.env.FB_TEST_EVENT_CODE;
 
     if (!PIXEL_ID || !ACCESS_TOKEN) {
       return NextResponse.json({ error: 'Missing Meta credentials' }, { status: 500 });
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
             st: [hashData('pe')],
             zp: [hashData('50000000')],
           },
-          test_event_code: TEST_EVENT_CODE, // Only for testing in Events Manager
+          test_event_code: TEST_EVENT_CODE, // Preenchendo dinamicamente
         },
       ],
     };
