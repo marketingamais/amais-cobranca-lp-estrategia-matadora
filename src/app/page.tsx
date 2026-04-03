@@ -22,7 +22,6 @@ import { VideoBackground }  from '@/components/ui/VideoBackground';
 import { StepsInteractive } from '@/components/ui/StepsInteractive';
 import { AlertTicker }      from '@/components/ui/AlertTicker';
 import { Header }           from '@/components/ui/Header';
-import { SuccessModal }     from '@/components/ui/SuccessModal';
 
 /* Remotion player carregado apenas no client, sem bloquear TTI */
 const RemotionPlayer = dynamic(
