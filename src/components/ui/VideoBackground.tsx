@@ -1,6 +1,4 @@
-'use client';
-
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 interface VideoBackgroundProps {
   /** Opacidade do overlay escuro sobre o vídeo (0–1). Default: 0.45 */
@@ -16,13 +14,12 @@ export function VideoBackground({
   className = '',
 }: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Garantir o loop infinito mesmo se o atributo loop nativo falhar
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
       video.play().catch(() => {
-        // Se o autoplay for bloqueado, tentamos novamente ao clicar
         document.addEventListener('click', () => video.play(), { once: true });
       });
     }
@@ -31,7 +28,7 @@ export function VideoBackground({
   return (
     <div
       className={`fixed inset-0 overflow-hidden pointer-events-none ${className}`}
-      style={{ zIndex: 0 }}
+      style={{ zIndex: 0, backgroundColor: '#05050a' }}
     >
       {/* ── 1. Vídeo em loop ── */}
       <video
@@ -42,12 +39,9 @@ export function VideoBackground({
         muted
         playsInline
         preload="auto"
-        onEnded={() => {
-          if (videoRef.current) {
-            videoRef.current.currentTime = 0;
-            videoRef.current.play().catch(() => {});
-          }
-        }}
+        onLoadedData={() => setIsLoaded(true)}
+        // @ts-ignore - fetchPriority is supported in modern browsers for LCP optimization
+        fetchPriority="high" 
         style={{
           position: 'absolute',
           inset: 0,
@@ -55,10 +49,12 @@ export function VideoBackground({
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center center',
+          opacity: isLoaded ? 1 : 0,
+          transition: 'opacity 1s ease-in-out',
         }}
       />
 
-      {/* ── 2. Blur overlay — idêntico ao original (blur: 15px) ── */}
+      {/* ── 2. Blur overlay ── */}
       <div
         style={{
           position: 'absolute',

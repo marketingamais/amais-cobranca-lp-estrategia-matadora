@@ -4,6 +4,7 @@ import './globals.css';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MetaPixel } from '@/components/analytics/MetaPixel';
 import { Clarity } from '@/components/analytics/Clarity';
+import { MotionProvider } from '@/components/providers/MotionProvider';
 
 const dmSans = DM_Sans({ 
   subsets: ['latin'], 
@@ -48,7 +49,9 @@ export default function RootLayout({
       >
         <MetaPixel />
         <Clarity />
-        {children}
+        <MotionProvider>
+          {children}
+        </MotionProvider>
         <SpeedInsights />
       </body>
     </html>
