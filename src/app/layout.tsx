@@ -40,8 +40,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        {/* Preload do vídeo de background — elimina latência no LCP */}
-        <link rel="preload" href="/bg-video.mp4" as="video" type="video/mp4" />
+        {/* ── 1. Preload do Poster LCP para performance máxima ── */}
+        <link rel="preload" href="/hero-poster.png" as="image" fetchPriority="high" />
       </head>
       <body 
         className={`${dmSans.variable} ${inter.variable} antialiased min-h-screen bg-bg-base text-text-primary`}

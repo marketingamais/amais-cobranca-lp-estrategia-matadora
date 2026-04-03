@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 import { Button } from './Button';
 
 export const Header = () => {
@@ -32,10 +33,13 @@ export const Header = () => {
     >
       <div className="max-w-[1200px] mx-auto px-6 lg:px-12 flex items-center justify-center md:justify-between">
         <a href="#" className="flex items-center gap-2 cursor-pointer z-10 hover:scale-105 transition-transform duration-300">
-          <img 
+          <Image 
             src="/amais-logo-v2.png" 
             alt="Amais Cobrança Logo" 
-            className="h-8 md:h-10 object-contain" 
+            width={160}
+            height={40}
+            priority
+            className="h-8 md:h-10 w-auto object-contain" 
           />
         </a>
         

@@ -34,6 +34,7 @@ export function VideoBackground({
       <video
         ref={videoRef}
         src="/bg-video.mp4"
+        poster="/hero-poster.png"
         autoPlay
         loop
         muted

@@ -9,11 +9,6 @@
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import {
-  ChartLineUp, Money, FlowArrow, Users, CheckCircle,
-  MapPinLine, ArrowUpRight, CalendarCheck,
-} from '@phosphor-icons/react';
-import { Check, X } from 'lucide-react';
 import Image from 'next/image';
 import { GlassCard }        from '@/components/ui/GlassCard';
 import { AmbientGlow }      from '@/components/ui/AmbientGlow';

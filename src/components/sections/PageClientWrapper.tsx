@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, ReactNode } from 'react';
-import { SuccessModalComponent } from '@/components/ui/SuccessModal';
+import dynamic from 'next/dynamic';
+const SuccessModalComponent = dynamic(() => import('@/components/ui/SuccessModal').then(m => m.SuccessModalComponent), {
+  ssr: false
+});
 
 export function PageClientWrapper({ 
   children,
