@@ -123,7 +123,7 @@ export function HeroSection({ onFormSuccess }: { onFormSuccess: () => void }) {
             >
               <div className="space-y-1">
                 <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Qual seu cargo na instituição?</label>
-                <select name="role" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                <select name="role" defaultValue="" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                   <option value="" disabled className="bg-[#05050a]">Selecione seu cargo</option>
                   <option value="Mantenedor" className="bg-[#05050a]">Mantenedor</option>
                   <option value="Diretor" className="bg-[#05050a]">Diretor</option>
@@ -137,7 +137,7 @@ export function HeroSection({ onFormSuccess }: { onFormSuccess: () => void }) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Segmento</label>
-                  <select name="segment" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                  <select name="segment" defaultValue="" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                     <option value="" disabled className="bg-[#05050a]">Selecione</option>
                     <option value="Educação básica" className="bg-[#05050a]">Educação básica</option>
                     <option value="Faculdade" className="bg-[#05050a]">Faculdade</option>
@@ -148,7 +148,7 @@ export function HeroSection({ onFormSuccess }: { onFormSuccess: () => void }) {
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-medium text-text-secondary uppercase tracking-wider">Nº de Alunos</label>
-                  <select name="students" defaultValue="" className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
+                  <select name="students" defaultValue="" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-text-primary focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/20 transition-all text-sm appearance-none cursor-pointer backdrop-blur-sm">
                     <option value="" disabled className="bg-[#05050a]">Selecione</option>
                     <option value="Até 500 alunos" className="bg-[#05050a]">Até 500 alunos</option>
                     <option value="501 a 1000 alunos" className="bg-[#05050a]">501 a 1000 alunos</option>
